@@ -1,15 +1,15 @@
 #!/usr/bin/env python3
-
+# Key-Value (KV) Secrets Engines API Resource
 from flask_restx import fields, Resource
 from flask import request
 from Api.api import api, conn, abort_if_authorization_fail
 
 # KV Namespace
 kv_ns = api.namespace(
-    name="kv",
-    description="Key-Value (kv) engine is used to store arbitrary secrets")
+    name="secrets/kv",
+    description="Key-Value (KV) engine is used to store arbitrary secrets")
 kv_model = api.model(
-    "Engine_KV", {
+    "Secrets Engine - KV", {
         "path": fields.String(
             required=True, pattern="[a-zA-Z0-9_]+", min_length=1,
             description="Path to the kv datastore"),
@@ -34,10 +34,10 @@ kv_parser.add_argument(
 @kv_ns.route("/<string:path>/<string:key>")
 @api.doc(
     responses={
-        404: "Path or kv not found",
+        404: "Path or KV not found",
         403: 'Not Authorized'},
     params={
-        "path": "Path to a kv store",
+        "path": "Path to a KV store",
         "key": "Key (index) in path where a secret (value) is stored",
     })
 class Engine_KV(Resource):
@@ -53,7 +53,7 @@ class Engine_KV(Resource):
         return conn.kv.update(path, key, args['value'])
 
     @api.doc(
-        description="Delete a kv from a path",
+        description="Delete a KV from a path",
         responses={204: "Secrets deleted"})
     def delete(self, path, key):
         """Delete a given kv"""
@@ -62,7 +62,7 @@ class Engine_KV(Resource):
 
         return conn.kv.delete(path, key)
 
-    @api.doc(description="Add a kv to a path", parser=kv_parser)
+    @api.doc(description="Add a KV to a path", parser=kv_parser)
     @api.marshal_with(kv_model)
     def post(self, path, key):
         """Add a new kv to a path"""
@@ -72,10 +72,10 @@ class Engine_KV(Resource):
 
         return conn.kv.add(path, key, args['value'])
 
-    @api.doc(description="Return a kv from a path")
+    @api.doc(description="Return a KV from a path")
     @api.marshal_with(kv_model)
     def get(self, path, key):
-        """Fetch a given kv from a path"""
+        """Fetch a given KV from a path"""
         API_KEY = request.headers.get('X-API-KEY', type=str, default=None)
         abort_if_authorization_fail(API_KEY)
         return conn.kv.get(path, key)

@@ -13,7 +13,7 @@ Hashi Corp Vault works well but it was meant for enterprises. Therefore, it was 
 ## Available secret engines
 - `kv` - Key-Value engine is used to store arbitrary secrets.
 
-# Available authentication methods
+## Available authentication methods
 - `token` - Allows users to authenticate using a token.
 
 ## Future
@@ -27,5 +27,5 @@ Hashi Corp Vault works well but it was meant for enterprises. Therefore, it was 
 CONNECTION_STRING=mongodb://username:password@mongo.hostname:27017
 ```
 3. Install the required python packages by executing `pip3 install -r requirements.txt`
-4. You will need atleast `python3.7`. Start the server by running `app.py`.
+4. You will need atleast `python3.7`. Start the server by running `server.py`.
 5. Visit the application via `http://server_hostname:5000/api` (default port is `5000`) to visit the Swagger UI. 

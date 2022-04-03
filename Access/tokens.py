@@ -18,7 +18,14 @@ class Tokens:
         # * db.tokens.createIndex( { "token": 1 }, { unique: true } )
         self._tokens = token_auth_col
 
-    def generate(self):
+    def generate(self, max_ttl=15811200):
+        """ Generates an API token
+        Args:
+            max_ttl (int, optional): Maximum TTL for generated token in seconds
+                    Defaults to 6 months or 15811200 seconds.
+        Returns:
+            dict : Dictionary with operation status and an API token
+        """
         token = secrets.token_hex(32)
         data = {
             "token": token,
@@ -38,11 +45,18 @@ class Tokens:
         return result
 
     def is_authorized(self, token):
+        """ Check if a given token is valid
+        Args:
+            token (str): API token
+        Returns:
+            bool: True for valid tokens and False otherwise.
+        """
         finder = self._tokens.find_one({"token": token})
         # Return False, if token is not found
         if not finder:
             return False
-        # Return False, if token is found
+        # Return True, if token is found
+        # TODO: Check for Max TTL
         return True
 
     def renew(self):

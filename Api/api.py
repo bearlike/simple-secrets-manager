@@ -32,4 +32,5 @@ def abort_if_authorization_fail(token):
 # Import API Resources
 # The below conditions prevents IDE auto-formatting
 if True:
-    from Api.resources.KV_resources import Engine_KV  # noqa: F401
+    from Api.resources.secrets.kv_resource import Engine_KV  # noqa: F401
+    from Api.resources.auth.tokens_resource import Auth_Tokens  # noqa: F401
