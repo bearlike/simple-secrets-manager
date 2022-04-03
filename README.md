@@ -10,11 +10,13 @@ Hashi Corp Vault works well but it was meant for enterprises. Therefore, it was 
 - Should be compatible on both `x86-64` and `arm64v8` (mainly Raspberry Pi 4).
 - High stability, availability and easy scalability.      
 
-## Available Secret Engines
-- `kv` - Key-Value engine is used to store arbitrary secrets
+## Available secret engines
+- `kv` - Key-Value engine is used to store arbitrary secrets.
+
+## Available authentication methods
+- `token` - Allows users to authenticate using a token.
 
 ## Future
-- API keys for authorization.
 - Secret engines for certificates (PKI), SSH and databases.
 - Encrypting secrets before writing to a persistent storage, so gaining access to the raw storage isn't enough to access your secrets.
 
@@ -25,5 +27,5 @@ Hashi Corp Vault works well but it was meant for enterprises. Therefore, it was 
 CONNECTION_STRING=mongodb://username:password@mongo.hostname:27017
 ```
 3. Install the required python packages by executing `pip3 install -r requirements.txt`
-4. You will need atleast `python3.7`. Start the server by running `app.py`.
+4. You will need atleast `python3.7`. Start the server by running `server.py`.
 5. Visit the application via `http://server_hostname:5000/api` (default port is `5000`) to visit the Swagger UI. 
