@@ -3,7 +3,6 @@
 """
 # TODO: Max TTL, Access Control
 
-import pymongo
 from bson.timestamp import Timestamp
 import datetime as dt
 import secrets
@@ -11,7 +10,7 @@ import secrets
 
 class Tokens:
     def __init__(self, token_auth_col):
-        """ Class 
+        """ API token operations
         Args:
             token_auth_col (pymongo.collection.Collection)
         """

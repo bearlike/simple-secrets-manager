@@ -10,11 +10,13 @@ Hashi Corp Vault works well but it was meant for enterprises. Therefore, it was 
 - Should be compatible on both `x86-64` and `arm64v8` (mainly Raspberry Pi 4).
 - High stability, availability and easy scalability.      
 
-## Available Secret Engines
-- `kv` - Key-Value engine is used to store arbitrary secrets
+## Available secret engines
+- `kv` - Key-Value engine is used to store arbitrary secrets.
+
+# Available authentication methods
+- `token` - Allows users to authenticate using a token.
 
 ## Future
-- API keys for authorization.
 - Secret engines for certificates (PKI), SSH and databases.
 - Encrypting secrets before writing to a persistent storage, so gaining access to the raw storage isn't enough to access your secrets.
 
