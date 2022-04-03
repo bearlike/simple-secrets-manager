@@ -26,19 +26,23 @@ api_v1 = Blueprint("api", __name__, url_prefix="/api")
 api = Api(api_v1, version="1.0", title="Secrets Manager",
           description="Secrets management simplified",
           authorizations=authorizations, security='apikey')
+app = Flask(__name__)
+app.register_blueprint(api_v1)
 
 
-def abort_if_authorization_fail(API_KEY):
-    # TODO: Abort if API auth fail
-    print("API_KEY:", API_KEY)
+def abort_if_authorization_fail(token):
+    """ Check if an API token is valid
+    Args:
+        token (str): API Token
+    """
+    if not conn.tokens.is_authorized(token):
+        api.abort(403, "Not Authorized to access the requested resource")
 
 
 # KV Namespace
 kv_ns = api.namespace(
     name="kv",
-    description="Key-Value (kv) engine is used to store arbitrary secrets"
-)
-
+    description="Key-Value (kv) engine is used to store arbitrary secrets")
 kv_model = api.model(
     "Engine_KV", {
         "path": fields.String(
@@ -53,24 +57,22 @@ kv_model = api.model(
         "status": fields.String(
             required=False,
             description="Operation Status"),
-    }
-)
-
+    })
 kv_parser = api.parser()
 kv_parser.add_argument(
     "value", type=str, required=True, location="form",
-    help="Secret (value) for the corresponding Key (index) in Path"
-)
+    help="Secret (value) for the corresponding Key (index) in Path")
 
 
 @kv_ns.route("/<string:path>/<string:key>")
 @api.doc(
-    responses={404: "Path or kv not found"},
+    responses={
+        404: "Path or kv not found", 
+        403: 'Not Authorized'},
     params={
         "path": "Path to a kv store",
         "key": "Key (index) in path where a secret (value) is stored",
-    }
-)
+    })
 class Engine_KV(Resource):
     """Key-Value API operations"""
 
@@ -115,7 +117,5 @@ class Engine_KV(Resource):
 if __name__ == "__main__":
     os.system("cls")
     print("Reloading app...")
-    app = Flask(__name__)
-    app.register_blueprint(api_v1)
     app.run(host='0.0.0.0', port=os.environ.get("PORT", 5000),
             debug=True, use_reloader=True)
