@@ -21,11 +21,21 @@ Hashi Corp Vault works well but it was meant for enterprises. Therefore, it was 
 - Encrypting secrets before writing to a persistent storage, so gaining access to the raw storage isn't enough to access your secrets.
 
 ## Getting started
-1. Start a Mongo database server. A basic `docker-compose.yml` is available for you. 
-2. Create a `.env` file in the project root with the following values
+### Automated Install: [`docker-compose`](https://docs.docker.com/compose/install/)
+1. Adjust `docker-compose.yml` if necessary. Build the stack by executing `docker-compose build`.
+2. Run the stack by executing `docker-compose up -d`.
+
+### Manual Install
+1. Clone our repository and run
+```bash
+git clone --depth 1 https://github.com/bearlike/secrets-manager secrets-manager
+cd "secrets-manager"
+```
+2. Start a Mongo database server. 
+3. Create a `.env` file in the project root with the following values
 ```
 CONNECTION_STRING=mongodb://username:password@mongo.hostname:27017
 ```
-3. Install the required python packages by executing `pip3 install -r requirements.txt`
-4. You will need atleast `python3.7`. Start the server by running `server.py`.
-5. Visit the application via `http://server_hostname:5000/api` (default port is `5000`) to visit the Swagger UI. 
+4. Install the required python packages by executing `pip3 install -r requirements.txt`
+5. You will need atleast `python3.7`. Start the server by running `server.py`.
+6. Visit the application via `http://server_hostname:5000/api` (default port is `5000`) to visit the Swagger UI. 
