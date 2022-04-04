@@ -1,4 +1,4 @@
-name: CI
+name: Build and deploy multiarch image 
 
 on:
   schedule:
@@ -40,8 +40,16 @@ jobs:
       -
         name: Build and push
         uses: docker/build-push-action@v2
+        env:
+          IMG_NAME: ${{ 'krishnaalagiri/ssm' }}
+          # Versioning: MAJOR.MINOR.PATCH (eg., 1.2.3)
+          VERSION_FULL: ${{ '1.0.0' }}
+          # For v1.2.3, VERSION_SHORT is '1.2'
+          VERSION_SHORT: ${{ '1.0' }}
+          # For v1.2.3, VERSION_MAJOR is '1'
+          VERSION_MAJOR: ${{ '1' }}
         with:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: user/app:latest
+          tags: ${{ env.IMG_NAME }}:latest,${{ env.IMG_NAME }}:${{ env.VERSION_FULL }},${{ env.IMG_NAME }}:${{ env.VERSION_SHORT }},${{ env.IMG_NAME }}:${{ env.VERSION_MAJOR }} 
