@@ -1,6 +1,14 @@
-# Secrets Manager
+<h1 align="center"><a href="#"><img alt="Simple Secrets Manager" src="docs/img/gh_banner.png" /></a></h1>
+<p align="center">
+    <a href="https://hub.docker.com/r/krishnaalagiri/ssm"><img alt="Docker Image Latest Version" src="https://img.shields.io/docker/v/krishnaalagiri/ssm?logo=docker&sort=semver"></a>
+    <a href="https://hub.docker.com/r/krishnaalagiri/ssm"><img alt="Docker Image Architecture" src="https://img.shields.io/badge/architecture-arm64v8%20%7C%20x86__64-blue?logo=docker"></a>
+    <a href="/LICENSE"><img alt="License" src="https://img.shields.io/github/license/bearlike/simple-secrets-manager"></a>
+    <a href="https://github.com/bearlike/simple-secrets-manager"><img alt="GitHub Repository" src="https://img.shields.io/badge/GitHub-bearlike%2Fsimple--secrets--manager-blue?logo=github"></a>
+</p>
+
+
 Secure storage, and delivery for tokens, passwords, API keys, and other secrets using HTTP API, Swagger UI or Python Package.
-`TL;DR`: Poor Man's Hashi Corp Vault 
+> `TL;DR`: Poor Man's Hashi Corp Vault 
 
 ## Why does this exist?
 Hashi Corp Vault works well but it was meant for enterprises. Therefore, it was heavy and non-portable (atleast difficult) for my homelab setup. So I wanted to build a Secrets Manager intended for small scale setups that could also scale well. 
@@ -11,25 +19,28 @@ Hashi Corp Vault works well but it was meant for enterprises. Therefore, it was 
 - High stability, availability and easy scalability.      
 
 ## Available secret engines
-- `kv` - Key-Value engine is used to store arbitrary secrets.
+| Secret Engine | Description |
+|---------------|-------------|
+| `kv`          | Key-Value engine is used to store arbitrary secrets. |
 
 ## Available authentication methods
-- `token` - Allows users to authenticate using a token.
+| Auth Methods  | Description |
+|---------------|-------------|
+| `token`       | Allows users to authenticate using a token. |
 
 ## Future
 - Secret engines for certificates (PKI), SSH and databases.
 - Encrypting secrets before writing to a persistent storage, so gaining access to the raw storage isn't enough to access your secrets.
 
 ## Getting started
-### Automated Install: [`docker-compose`](https://docs.docker.com/compose/install/)
-1. Adjust `docker-compose.yml` if necessary. Build the stack by executing `docker-compose build`.
-2. Run the stack by executing `docker-compose up -d`.
+### Automated Install: [`docker-compose`](https://docs.docker.com/compose/install/) (Recommended)
+1. Run the [stack](https://github.com/bearlike/simple-secrets-manager/blob/main/docker-compose.yml) by executing `docker-compose up -d`.
 
 ### Manual Install
 1. Clone our repository and run
 ```bash
-git clone --depth 1 https://github.com/bearlike/secrets-manager secrets-manager
-cd "secrets-manager"
+git clone --depth 1 https://github.com/bearlike/simple-secrets-manager simple-secrets-manager
+cd "simple-secrets-manager"
 ```
 2. Start a Mongo database server. 
 3. Create a `.env` file in the project root with the following values
