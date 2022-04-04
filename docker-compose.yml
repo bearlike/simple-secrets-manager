@@ -1,12 +1,13 @@
 version: '3'
-
-# To build and start stack:
-# docker-compose build; docker-compose up -d
+# To start stack:
+# $ docker-compose build
 #
 # To stop stack:
-# docker-compose down
+# $ docker-compose down
 services:
-
+  # From v5.0.0, mongoDB requires atleast ARMv8.2-A microarchitecture to run.
+  # So we're going with v4 to improve compatibility on SBCs such as
+  # Raspberry Pi 4 and Odroid C2 with ARMv8.0-A
   mongo:
     image: mongo:4
     restart: always
@@ -17,9 +18,7 @@ services:
       - app-tier
 
   app:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: krishnaalagiri/ssm:latest
     depends_on:
       - mongo
     ports:
