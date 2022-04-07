@@ -11,10 +11,6 @@ on:
       - 'v*'
     paths-ignore:
       - 'docs/**'
-  pull_request:
-    branches:
-      - 'main'
-      - 'releases/v*'
   workflow_dispatch:
 
 

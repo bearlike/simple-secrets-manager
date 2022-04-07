@@ -1,7 +1,7 @@
 <img alt="Simple Secrets Manager" src="https://github.com/bearlike/simple-secrets-manager/raw/main/docs/img/gh_banner.png" />
 <p align="center">
-    <a href="https://hub.docker.com/r/krishnaalagiri/ssm"><img alt="Docker Image Latest Version" src="https://img.shields.io/docker/v/krishnaalagiri/ssm?logo=docker&sort=semver"></a>
-    <a href="https://hub.docker.com/r/krishnaalagiri/ssm"><img alt="Docker Image Architecture" src="https://img.shields.io/badge/architecture-arm64v8%20%7C%20x86__64-blue?logo=docker"></a>
+    <a href="https://hub.docker.com/r/krishnaalagiri/ssm/tags"><img alt="Docker Image Latest Version" src="https://img.shields.io/docker/v/krishnaalagiri/ssm?logo=docker&sort=semver"></a>
+    <a href="https://hub.docker.com/r/krishnaalagiri/ssm/tags"><img alt="Docker Image Architecture" src="https://img.shields.io/badge/architecture-arm64v8%20%7C%20x86__64-blue?logo=docker"></a>
     <a href="https://github.com/bearlike/simple-secrets-manager/actions/workflows/ci.yml"><img alt="GitHub Repository" src="https://img.shields.io/github/workflow/status/bearlike/simple-secrets-manager/Build%20and%20deploy%20multiarch%20image?logo=github"></a>
     <a href="https://github.com/bearlike/simple-secrets-manager"><img alt="GitHub Repository" src="https://img.shields.io/badge/GitHub-bearlike%2Fsimple--secrets--manager-blue?logo=github"></a>
     <a href="https://github.com/bearlike/simple-secrets-manager/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/bearlike/simple-secrets-manager"></a>
@@ -13,8 +13,8 @@ Secure storage, and delivery for tokens, passwords, API keys, and other secrets 
 
 
 ## Supported tags and respective [Dockerfile](https://github.com/bearlike/simple-secrets-manager/blob/main/Dockerfile) links
-- [`1.1.0`, `1.1`, `1`, `latest`](https://github.com/bearlike/simple-secrets-manager/blob/main/Dockerfile)
-- [`1.0.0`, `1.0`](https://github.com/bearlike/simple-secrets-manager/blob/dad59e8bda7eaeddd2e14660958d3227ac035b3d/Dockerfile)
+- [`1.1.0`, `1.1`, `1`, `latest`](https://github.com/bearlike/simple-secrets-manager/blob/releases/v1.1.0/Dockerfile)
+- [`1.0.0`, `1.0`](https://github.com/bearlike/simple-secrets-manager/blob/releases/v1.0.0/Dockerfile)
 
 
 ## Quick reference (cont.)
@@ -39,9 +39,10 @@ Hashi Corp Vault works well but it was meant for enterprises. Therefore, it was 
 
 
 ## Available authentication methods
-| Auth Methods | Description                                 |
-| ------------ | ------------------------------------------- |
-| `token`      | Allows users to authenticate using a token. |
+| Auth Methods      | Description                                 |
+|-------------------|---------------------------------------------|
+| `userpass`        | Allows users to authenticate using a username and password combination.   |
+| `token`           | Allows users to authenticate using a token. Token generation requires users to be authenticated via `userpass`  |
 
 
 ## Getting started
@@ -50,6 +51,9 @@ Hashi Corp Vault works well but it was meant for enterprises. Therefore, it was 
 
 ```yaml
 version: '3'
+volumes:
+  mongo_data:
+
 services:
   mongo:
     image: mongo:4
@@ -57,6 +61,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - mongo_data:/data/db
     networks:
       - app-tier
 
