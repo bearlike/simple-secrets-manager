@@ -1,4 +1,6 @@
-Flask
-flask-restx
-pymongo
+# Specifying versions to prevent major code-breaking changes
+wheel
+flask-restx>=0.5.1
+pymongo>4, <5
 python-dotenv
+Flask-HTTPAuth>4, <5

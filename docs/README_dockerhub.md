@@ -12,8 +12,9 @@ Secure storage, and delivery for tokens, passwords, API keys, and other secrets 
 > `TL;DR`: Poor Man's Hashi Corp Vault 
 
 
-## Supported tags and respective [Dockerfile](https://github.com/bearlike/simple-secrets-manager/blob/main/.github/workflows/ci.yml) links
-- [`1.0.0`, `1.0`, `1`, `latest`](https://github.com/bearlike/simple-secrets-manager/blob/dad59e8bda7eaeddd2e14660958d3227ac035b3d/.github/workflows/ci.yml)
+## Supported tags and respective [Dockerfile](https://github.com/bearlike/simple-secrets-manager/blob/main/Dockerfile) links
+- [`1.1.0`, `1.1`, `1`, `latest`](https://github.com/bearlike/simple-secrets-manager/blob/main/Dockerfile)
+- [`1.0.0`, `1.0`](https://github.com/bearlike/simple-secrets-manager/blob/dad59e8bda7eaeddd2e14660958d3227ac035b3d/Dockerfile)
 
 
 ## Quick reference (cont.)

@@ -43,9 +43,9 @@ jobs:
         env:
           IMG_NAME: ${{ 'krishnaalagiri/ssm' }}
           # Versioning: MAJOR.MINOR.PATCH (eg., 1.2.3)
-          VERSION_FULL: ${{ '1.0.0' }}
+          VERSION_FULL: ${{ '1.1.0' }}
           # For v1.2.3, VERSION_SHORT is '1.2'
-          VERSION_SHORT: ${{ '1.0' }}
+          VERSION_SHORT: ${{ '1.1' }}
           # For v1.2.3, VERSION_MAJOR is '1'
           VERSION_MAJOR: ${{ '1' }}
         with:

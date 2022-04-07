@@ -3,7 +3,7 @@
 FROM python:3.8-slim-buster
 
 LABEL title="Simple Secrets Manager"
-LABEL version="1.0.0"
+LABEL version="1.1.0"
 LABEL author.name="Krishnakanth Alagiri"
 LABEL author.github="https://github.com/bearlike"
 LABEL repository="https://github.com/bearlike/simple-secrets-manager"
