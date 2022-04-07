@@ -1,9 +1,12 @@
 version: '3'
 # To start stack:
-# $ docker-compose build
+# $ docker-compose run -d
 #
 # To stop stack:
 # $ docker-compose down
+volumes:
+  mongo_data:
+
 services:
   # From v5.0.0, mongoDB requires atleast ARMv8.2-A microarchitecture to run.
   # So we're going with v4 to improve compatibility on SBCs such as
@@ -14,6 +17,8 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - mongo_data:/data/db
     networks:
       - app-tier
 

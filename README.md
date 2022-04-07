@@ -27,8 +27,8 @@ Hashi Corp Vault works well but it was meant for enterprises. Therefore, it was 
 ## Available authentication methods
 | Auth Methods      | Description                                                               |
 |-------------------|---------------------------------------------------------------------------|
-| `token`           | Allows users to authenticate using a token.                               |
 | `userpass`        | Allows users to authenticate using a username and password combination.   |
+| `token`           | Allows users to authenticate using a token. Token generation requires users to be authenticated via `userpass`                               |
 
 ## Future
 - Secret engines for certificates (PKI), SSH and databases.

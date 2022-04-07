@@ -2,7 +2,8 @@
 # Key-Value (KV) Secrets Engines API Resource
 from flask_restx import fields, Resource
 from flask import request
-from Api.api import api, conn, abort_if_authorization_fail
+from Api.api import api, conn
+from Access.is_auth import abort_if_authorization_fail
 
 # KV Namespace
 kv_ns = api.namespace(
@@ -43,7 +44,9 @@ kv_parser.add_argument(
 class Engine_KV(Resource):
     """Key-Value API operations"""
 
-    @api.doc(description="Update a kv in a path", parser=kv_parser)
+    @api.doc(
+        description="Update a kv in a path", security='Token',
+        parser=kv_parser)
     @api.marshal_with(kv_model)
     def put(self, path, key):
         """Update a given resource"""
@@ -53,29 +56,33 @@ class Engine_KV(Resource):
         return conn.kv.update(path, key, args['value'])
 
     @api.doc(
-        description="Delete a KV from a path",
+        description="Delete a KV from a path", security='Token',
         responses={204: "Secrets deleted"})
     def delete(self, path, key):
         """Delete a given kv"""
+        # ! Appropriate HTTP response codes need to be returned
         API_KEY = request.headers.get('X-API-KEY', type=str, default=None)
         abort_if_authorization_fail(API_KEY)
-
         return conn.kv.delete(path, key)
 
-    @api.doc(description="Add a KV to a path", parser=kv_parser)
+    @api.doc(
+        description="Add a KV to a path", security='Token',
+        parser=kv_parser)
     @api.marshal_with(kv_model)
     def post(self, path, key):
         """Add a new kv to a path"""
+        # ! Appropriate HTTP response codes need to be returned
         args = kv_parser.parse_args()
         API_KEY = request.headers.get('X-API-KEY', type=str, default=None)
         abort_if_authorization_fail(API_KEY)
 
         return conn.kv.add(path, key, args['value'])
 
-    @api.doc(description="Return a KV from a path")
+    @api.doc(description="Return a KV from a path", security='Token')
     @api.marshal_with(kv_model)
     def get(self, path, key):
         """Fetch a given KV from a path"""
+        # ! Appropriate HTTP response codes need to be returned
         API_KEY = request.headers.get('X-API-KEY', type=str, default=None)
         abort_if_authorization_fail(API_KEY)
         return conn.kv.get(path, key)
