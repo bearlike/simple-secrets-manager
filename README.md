@@ -5,7 +5,6 @@
     <a href="https://github.com/bearlike/simple-secrets-manager/actions/workflows/ci.yml"><img alt="GitHub Repository" src="https://img.shields.io/github/workflow/status/bearlike/simple-secrets-manager/Build%20and%20deploy%20multiarch%20image?logo=github"></a>
     <a href="https://github.com/bearlike/simple-secrets-manager"><img alt="GitHub Repository" src="https://img.shields.io/badge/GitHub-bearlike%2Fsimple--secrets--manager-blue?logo=github"></a>
     <a href="/LICENSE"><img alt="License" src="https://img.shields.io/github/license/bearlike/simple-secrets-manager"></a>
-
 </p>
 
 
@@ -21,14 +20,15 @@ Hashi Corp Vault works well but it was meant for enterprises. Therefore, it was 
 - High stability, availability and easy scalability.      
 
 ## Available secret engines
-| Secret Engine | Description |
-|---------------|-------------|
-| `kv`          | Key-Value engine is used to store arbitrary secrets. |
+| Secret Engine | Description                                           |
+|---------------|-------------------------------------------------------|
+| `kv`          | Key-Value engine is used to store arbitrary secrets.  |
 
 ## Available authentication methods
-| Auth Methods  | Description |
-|---------------|-------------|
-| `token`       | Allows users to authenticate using a token. |
+| Auth Methods      | Description                                                               |
+|-------------------|---------------------------------------------------------------------------|
+| `token`           | Allows users to authenticate using a token.                               |
+| `userpass`        | Allows users to authenticate using a username and password combination.   |
 
 ## Future
 - Secret engines for certificates (PKI), SSH and databases.

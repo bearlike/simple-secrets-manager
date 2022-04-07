@@ -13,7 +13,7 @@ authorizations = {
 
 conn = Connection()
 api_v1 = Blueprint("api", __name__, url_prefix="/api")
-api = Api(api_v1, version="1.0", title="Secrets Manager",
+api = Api(api_v1, version="1.1.0", title="Simple Secrets Manager",
           description="Secrets management simplified",
           authorizations=authorizations, security='apikey')
 app = Flask(__name__)
@@ -32,5 +32,9 @@ def abort_if_authorization_fail(token):
 # Import API Resources
 # The below conditions prevents IDE auto-formatting
 if True:
+    # Secret Engines
     from Api.resources.secrets.kv_resource import Engine_KV  # noqa: F401
     from Api.resources.auth.tokens_resource import Auth_Tokens  # noqa: F401
+    # Authentication methods
+    from Api.resources.auth.userpass_resource \
+        import Auth_Userpass_delete, Auth_Userpass_register  # noqa: F401
