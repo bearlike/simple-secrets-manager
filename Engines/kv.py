@@ -33,7 +33,7 @@ class Key_Value_Secrets:
 
     def add(self, path, key, value):
         pattern = "[a-zA-Z0-9_]+"
-        if not (re.fullmatch(pattern, key) and re.fullmatch(pattern, value)):
+        if not (re.fullmatch(pattern, key) and re.fullmatch(pattern, path)):
             return {"status": f"Key and/or Path does not match {pattern}"}
         finder = self._kv.find_one({"path": path})
         if finder is None:
