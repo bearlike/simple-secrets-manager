@@ -24,6 +24,7 @@ services:
 
   app:
     image: krishnaalagiri/ssm:latest
+    restart: always
     depends_on:
       - mongo
     ports:
