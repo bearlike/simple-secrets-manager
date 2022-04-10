@@ -17,7 +17,7 @@ authorizations = {
 
 conn = Connection()
 api_v1 = Blueprint("api", __name__, url_prefix="/api")
-api = Api(api_v1, version="1.1.1", title="Simple Secrets Manager",
+api = Api(api_v1, version="1.1.2", title="Simple Secrets Manager",
           description="Secrets management simplified",
           authorizations=authorizations)
 app = Flask(__name__)
@@ -26,6 +26,7 @@ app.register_blueprint(api_v1)
 
 # Import API Resources
 # The below conditions prevents IDE auto-formatting
+# skipcq: PYL-W0125
 if True:
     # Secret Engines
     from Api.resources.secrets.kv_resource import Engine_KV  # noqa: F401

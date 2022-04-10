@@ -22,7 +22,7 @@ services:
     networks:
       - app-tier
 
-  app:
+  ssm-app:
     image: krishnaalagiri/ssm:latest
     restart: always
     depends_on:

@@ -4,7 +4,7 @@
 # $ docker login -u <username>
 #
 # We try to follow [SemVer v2.0.0](https://semver.org/)
-VERSION="1.1.1"
+VERSION="1.1.2"
 # If $VERSION = "1.2.3"
 # ${VERSION::3} will be "1.2"
 # ${VERSION::1} will be "1"

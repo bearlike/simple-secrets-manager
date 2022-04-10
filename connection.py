@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-""" Brains for the Secrets Manager
+""" Database model for the Secrets Manager
 """
 import pymongo
 import logging
 import os
-# Secret Engines
+import sys
+# Secret engines imports
 from Engines.kv import Key_Value_Secrets as _KV
-# Auth Methods
+# Auth methods imports
 from Access.tokens import Tokens as _Tokens
 from Access.userpass import User_Pass as _User_Pass
 
@@ -15,7 +16,7 @@ class Connection:
     def __init__(self):
         if os.environ.get("CONNECTION_STRING") is None:
             logging.error("CONNECTION_STRING variable not found")
-            exit(-1)
+            sys.exit(-1)
         # Create a connection using MongoClient.
         self._client = pymongo.MongoClient(os.environ["CONNECTION_STRING"])
         self._data = self._client["secrets_manager_data"]
