@@ -13,7 +13,8 @@ Secure storage, and delivery for tokens, passwords, API keys, and other secrets 
 
 
 ## Supported tags and respective [Dockerfile](https://github.com/bearlike/simple-secrets-manager/blob/main/Dockerfile) links
-- [`1.1.1`, `1.1`, `1`, `latest`](https://github.com/bearlike/simple-secrets-manager/blob/releases/v1.1.1/Dockerfile)
+- [`1.1.2`, `1.1`, `1`, `latest`](https://github.com/bearlike/simple-secrets-manager/blob/releases/v1.1.2/Dockerfile)
+- [`1.1.1`](https://github.com/bearlike/simple-secrets-manager/blob/releases/v1.1.1/Dockerfile)
 - [`1.1.0`](https://github.com/bearlike/simple-secrets-manager/blob/releases/v1.1.0/Dockerfile)
 - [`1.0.0`, `1.0`](https://github.com/bearlike/simple-secrets-manager/blob/releases/v1.0.0/Dockerfile)
 
@@ -49,13 +50,16 @@ Hashi Corp Vault works well but it was meant for enterprises. Therefore, it was 
 ## Getting started
 ### Automated Install: [`docker-compose`](https://docs.docker.com/compose/install/) (Recommended)
 1. Run the [stack](https://github.com/bearlike/simple-secrets-manager/blob/main/docker-compose.yml) by executing `docker-compose up -d`.
-
+2. Stop stack by executing `docker-compose down`
 ```yaml
 version: '3'
 volumes:
   mongo_data:
 
 services:
+  # From v5.0.0, mongoDB requires atleast ARMv8.2-A microarchitecture to run.
+  # So we're going with v4 to improve compatibility on SBCs such as
+  # Raspberry Pi 4 and Odroid C2 with ARMv8.0-A
   mongo:
     image: mongo:4
     restart: always
@@ -67,8 +71,9 @@ services:
     networks:
       - app-tier
 
-  app:
+  ssm-app:
     image: krishnaalagiri/ssm:latest
+    restart: always
     depends_on:
       - mongo
     ports:

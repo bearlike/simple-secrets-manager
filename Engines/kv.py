@@ -40,7 +40,7 @@ class Key_Value_Secrets:
             # Create a Path where kv(s) goes into
             finder = {
                 "path": path,
-                "data": dict(),
+                "data": {},
             }
             _ = self._kv.insert_one(finder)
         if key not in finder["data"].keys():

@@ -15,13 +15,12 @@ logging.basicConfig(filename='secrets_manager.log',
 
 def init_app():
     from Api.api import app
-    app.run(host='0.0.0.0',
+    app.run(host=os.environ.get("BIND_HOST", '0.0.0.0'),
             port=os.environ.get("PORT", 5000),
             debug=bool(strtobool(os.getenv('DEBUG', 'False'))),
             use_reloader=True)
 
 
 if __name__ == "__main__":
-    os.system('cls' if os.name == 'nt' else 'clear')
     print("Server started...")
     init_app()

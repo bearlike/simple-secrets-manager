@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """ Token authentication for Secrets Manager
 """
-# TODO: Max TTL, Access Control
+# TODO: Implement Max TTL, Access Control
 
 from bson.timestamp import Timestamp
 import datetime as dt
@@ -30,6 +30,7 @@ class Tokens:
         data = {
             "token": token,
             "owner": username,
+            "max_ttl": max_ttl,
             "generated_on": Timestamp(int(dt.datetime.today().timestamp()), 1),
         }
         _ = self._tokens.insert_one(data)
@@ -66,4 +67,5 @@ class Tokens:
         return True, finder["owner"]
 
     def renew(self):
+        # TODO: Implement renew to extend MAX TTL
         pass
