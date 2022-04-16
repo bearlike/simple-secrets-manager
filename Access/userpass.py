@@ -86,9 +86,8 @@ class User_Pass:
             }
             _ = self._userpass.insert_one(data)
             status = {"status": "OK"}
-        else:
-            return "User already exist", 400
-        return status, 200
+            return status, 200
+        return "User already exist", 400
 
     def remove(self, username):
         """ Deletes an existing user
@@ -100,9 +99,8 @@ class User_Pass:
         finder = self._userpass.find_one({"username": username})
         if not finder:
             return "User does not exist", 400
-        else:
-            _ = self._userpass.delete_one({"username": username})
-            result = {"status": "OK"}
+        _ = self._userpass.delete_one({"username": username})
+        result = {"status": "OK"}
         return result, 200
 
     def is_authorized(self, username, password):

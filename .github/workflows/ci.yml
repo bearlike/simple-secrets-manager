@@ -2,8 +2,6 @@ name: Build and deploy multiarch image
 
 on:
   push:
-#    branches:
-#      - 'releases/v*'
     tags:
       - 'v*'
     paths-ignore:
@@ -37,9 +35,9 @@ jobs:
         env:
           IMG_NAME: ${{ 'krishnaalagiri/ssm' }}
           # Versioning: MAJOR.MINOR.PATCH (eg., 1.2.3)
-          VERSION_FULL: ${{ '1.1.2' }}
+          VERSION_FULL: ${{ '1.2.0' }}
           # For v1.2.3, VERSION_SHORT is '1.2'
-          VERSION_SHORT: ${{ '1.1' }}
+          VERSION_SHORT: ${{ '1.2' }}
           # For v1.2.3, VERSION_MAJOR is '1'
           VERSION_MAJOR: ${{ '1' }}
         with:

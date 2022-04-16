@@ -18,15 +18,14 @@ class Key_Value_Secrets:
         finder = self._kv.find_one({"path": path})
         if not finder:
             return "'Path' not found in KV engine", 404
-        elif key not in finder["data"].keys():
+        if key not in finder["data"].keys():
             return f"Key not found in '{path}'", 404
-        else:
-            result = {
-                "value": finder["data"][key],
-                "status": "OK",
-                "path": path,
-                "key": key
-            }
+        result = {
+            "value": finder["data"][key],
+            "status": "OK",
+            "path": path,
+            "key": key
+        }
         return result, 200
 
     def add(self, path, key, value):
@@ -49,7 +48,7 @@ class Key_Value_Secrets:
                 "status": "success",
                 "path": path,
                 "key": key,
-                }
+            }
         else:
             return {"status": f"Key already exist in '{path}'"}, 400
         return result, 200
@@ -58,31 +57,29 @@ class Key_Value_Secrets:
         finder = self._kv.find_one({"path": path})
         if not finder:
             return "Path not found", 404
-        elif key not in finder["data"].keys():
+        if key not in finder["data"].keys():
             return f"Key not found in '{path}'", 404
-        else:
-            self._kv.update_one(
-                {"path": path}, {"$unset": {f"data.{key}": 1}})
-            # TODO: Delete document if path has no kv(s)
-            result = {
-                "status": "OK",
-                "path": path,
-                "key": key
-                }
+        self._kv.update_one(
+            {"path": path}, {"$unset": {f"data.{key}": 1}})
+        # TODO: Delete document if path has no kv(s)
+        result = {
+            "status": "OK",
+            "path": path,
+            "key": key
+        }
         return result, 200
 
     def update(self, path, key, value):
         finder = self._kv.find_one({"path": path})
         if not finder:
             return "Path not found", 404
-        elif key not in finder["data"].keys():
+        if key not in finder["data"].keys():
             return f"Key not found in '{path}'", 404
-        else:
-            self._kv.update_one(
-                {"path": path}, {"$set": {f"data.{key}": value}})
-            result = {
-                "status": "OK",
-                "path": path,
-                "key": key
-            }
+        self._kv.update_one(
+            {"path": path}, {"$set": {f"data.{key}": value}})
+        result = {
+            "status": "OK",
+            "path": path,
+            "key": key
+        }
         return result, 200
