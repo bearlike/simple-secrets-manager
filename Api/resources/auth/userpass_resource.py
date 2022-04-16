@@ -30,10 +30,10 @@ delete_userpass_parser.add_argument(
 post_userpass_parser = api.parser()
 post_userpass_parser.add_argument(
     "username", type=str, required=True, location="form",
-    help="Username must atleast be 2 characters long")
+    help="Username must atleast be 1 characters long")
 post_userpass_parser.add_argument(
     "password", type=str, required=True, location="form",
-    help="Password should atleast be 6 characters long")
+    help="Password should satisfy policy")
 
 
 @userpass_ns.route("/delete")
@@ -42,16 +42,21 @@ post_userpass_parser.add_argument(
     params={})
 class Auth_Userpass_delete(Resource):
     """Userpass operations"""
-
     @api.doc(
         description="Revoke a given user",
-        responses={200: "User account removed"},
+        responses={
+            200: "User account removed",
+            400: "User does not exist",
+        },
         parser=delete_userpass_parser)
     @api.marshal_with(userpass_model)
     def delete(self):
         """Revoke a given user"""
         args = delete_userpass_parser.parse_args()
-        return conn.userpass.remove(username=args['username'])
+        status, code = conn.userpass.remove(username=args['username'])
+        if code != 200:
+            api.abort(code, status)
+        return status
 
 
 @userpass_ns.route("/register")
@@ -60,9 +65,12 @@ class Auth_Userpass_delete(Resource):
     params={})
 class Auth_Userpass_register(Resource):
     """Userpass operations"""
-
     @api.doc(
         description="Register new user.",
+        responses={
+            200: "User account created",
+            400: "Invalid username or password",
+        },
         parser=post_userpass_parser)
     @api.marshal_with(userpass_model)
     def post(self):
@@ -70,4 +78,7 @@ class Auth_Userpass_register(Resource):
         # TODO: Support for root key to create new users
         args = post_userpass_parser.parse_args()
         _usr, _pass = args['username'], args['password']
-        return conn.userpass.register(username=_usr, password=_pass)
+        status, code = conn.userpass.register(username=_usr, password=_pass)
+        if code != 200:
+            api.abort(code, status)
+        return status

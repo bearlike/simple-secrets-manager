@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from connection import Connection
 from flask_restx import Api
-from flask import Flask, Blueprint, abort, jsonify
+from flask import Flask, Blueprint
 
 authorizations = {
     "Token": {
