@@ -35,8 +35,8 @@ kv_parser.add_argument(
 @kv_ns.route("/<string:path>/<string:key>")
 @api.doc(
     responses={
-        404: "Path or KV not found",
-        403: 'Not Authorized'},
+        401: "Unauthorized",
+        404: "Path or KV not found"},
     params={
         "path": "Path to a KV store",
         "key": "Key (index) in path where a secret (value) is stored",
@@ -53,17 +53,24 @@ class Engine_KV(Resource):
         args = kv_parser.parse_args()
         API_KEY = request.headers.get('X-API-KEY', type=str, default=None)
         abort_if_authorization_fail(API_KEY)
-        return conn.kv.update(path, key, args['value'])
+        status, code = conn.kv.update(path, key, args['value'])
+        if code != 200:
+            api.abort(code, status)
+            return None
+        return status
 
     @api.doc(
         description="Delete a KV from a path", security='Token',
-        responses={204: "Secrets deleted"})
+        responses={200: "Secrets deleted"})
     def delete(self, path, key):
         """Delete a given kv"""
-        # ! Appropriate HTTP response codes need to be returned
         API_KEY = request.headers.get('X-API-KEY', type=str, default=None)
         abort_if_authorization_fail(API_KEY)
-        return conn.kv.delete(path, key)
+        status, code = conn.kv.delete(path, key)
+        if code != 200:
+            api.abort(code, status)
+            return None
+        return status
 
     @api.doc(
         description="Add a KV to a path", security='Token',
@@ -71,18 +78,22 @@ class Engine_KV(Resource):
     @api.marshal_with(kv_model)
     def post(self, path, key):
         """Add a new kv to a path"""
-        # ! Appropriate HTTP response codes need to be returned
         args = kv_parser.parse_args()
         API_KEY = request.headers.get('X-API-KEY', type=str, default=None)
         abort_if_authorization_fail(API_KEY)
-
-        return conn.kv.add(path, key, args['value'])
+        status, code = conn.kv.add(path, key, args['value'])
+        if code != 200:
+            api.abort(code, status)
+            return None
+        return status
 
     @api.doc(description="Return a KV from a path", security='Token')
     @api.marshal_with(kv_model)
     def get(self, path, key):
         """Fetch a given KV from a path"""
-        # ! Appropriate HTTP response codes need to be returned
         API_KEY = request.headers.get('X-API-KEY', type=str, default=None)
         abort_if_authorization_fail(API_KEY)
-        return conn.kv.get(path, key)
+        status, code = conn.kv.get(path, key)
+        if code != 200:
+            api.abort(code, str(status))
+        return status
