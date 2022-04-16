@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from connection import Connection
 from flask_restx import Api
-from flask import Flask, Blueprint
+from flask import Flask, Blueprint, abort, jsonify
 
 authorizations = {
     "Token": {
@@ -34,3 +34,5 @@ if True:
     # Authentication methods
     from Api.resources.auth.userpass_resource \
         import Auth_Userpass_delete, Auth_Userpass_register  # noqa: F401
+    # Handling HTTP Errors
+    from Api.errors import errors  # noqa: F401
