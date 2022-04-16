@@ -13,7 +13,8 @@ Secure storage, and delivery for tokens, passwords, API keys, and other secrets 
 
 
 ## Supported tags and respective [Dockerfile](https://github.com/bearlike/simple-secrets-manager/blob/main/Dockerfile) links
-- [`1.1.2`, `1.1`, `1`, `latest`](https://github.com/bearlike/simple-secrets-manager/blob/releases/v1.1.2/Dockerfile)
+- [`1.2.0`, `1.2`, `1`, `latest`](https://github.com/bearlike/simple-secrets-manager/blob/releases/v1.2.0/Dockerfile)
+- [`1.1.2`, `1.1`](https://github.com/bearlike/simple-secrets-manager/blob/releases/v1.1.2/Dockerfile)
 - [`1.1.1`](https://github.com/bearlike/simple-secrets-manager/blob/releases/v1.1.1/Dockerfile)
 - [`1.1.0`](https://github.com/bearlike/simple-secrets-manager/blob/releases/v1.1.0/Dockerfile)
 - [`1.0.0`, `1.0`](https://github.com/bearlike/simple-secrets-manager/blob/releases/v1.0.0/Dockerfile)

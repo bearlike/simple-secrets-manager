@@ -17,7 +17,7 @@ authorizations = {
 
 conn = Connection()
 api_v1 = Blueprint("api", __name__, url_prefix="/api")
-api = Api(api_v1, version="1.1.2", title="Simple Secrets Manager",
+api = Api(api_v1, version="1.2.0", title="Simple Secrets Manager",
           description="Secrets management simplified",
           authorizations=authorizations)
 app = Flask(__name__)
@@ -34,3 +34,5 @@ if True:
     # Authentication methods
     from Api.resources.auth.userpass_resource \
         import Auth_Userpass_delete, Auth_Userpass_register  # noqa: F401
+    # Handling HTTP Errors
+    from Api.errors import errors  # noqa: F401
