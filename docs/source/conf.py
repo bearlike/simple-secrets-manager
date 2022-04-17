@@ -2,12 +2,12 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'Simple Secrets Manager'
+copyright = '2022, Krishnakanth Alagiri'
+author = 'Krishnakanth Alagiri'
 
-release = '0.1'
-version = '0.1.0'
+release = '1.2'
+version = '1.2.0'
 
 # -- General configuration
 

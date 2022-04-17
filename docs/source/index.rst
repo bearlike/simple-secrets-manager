@@ -1,17 +1,34 @@
-Welcome to Lumache's documentation!
-===================================
+Simple Secret Manager's documentation
+=======================================
 
-**Lumache** (/lu'make/) is a Python library for cooks and food lovers
-that creates recipes mixing random ingredients.
-It pulls data from the `Open Food Facts database <https://world.openfoodfacts.org/>`_
-and offers a *simple* and *intuitive* API.
+Secure storage, and delivery for tokens, passwords, API keys, and other secrets using HTTP API, Swagger UI or Python Package. I wanted a Secrets Manager intended for small scale setups that could also scale well. 
 
-Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
+Available secret engines
+---------------------------
 
-.. note::
+.. list-table:: 
+   :widths: 25 75
+   :header-rows: 1
 
-   This project is under active development.
+   * - Secret
+     - Engine Description
+   * - `kv`
+     - Key-Value engine is used to store arbitrary secrets.
+
+
+Available authentication methods
+---------------------------------
+
+.. list-table:: 
+   :widths: 25 75
+   :header-rows: 1
+
+   * - Auth Methods
+     - Description
+   * - `userpass`
+     - Allows users to authenticate using a username and password combination.
+   * - `token`
+     - Allows users to authenticate using a token. Token generation requires users to be authenticated via 
 
 Contents
 --------
