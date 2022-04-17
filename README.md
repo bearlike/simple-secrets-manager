@@ -4,6 +4,7 @@
     <a href="https://hub.docker.com/r/krishnaalagiri/ssm"><img alt="Docker Image Architecture" src="https://img.shields.io/badge/architecture-arm64v8%20%7C%20x86__64-blue?logo=docker"></a>
     <a href="https://github.com/bearlike/simple-secrets-manager/actions/workflows/ci.yml"><img alt="GitHub Repository" src="https://img.shields.io/github/workflow/status/bearlike/simple-secrets-manager/Build%20and%20deploy%20multiarch%20image?logo=github"></a>
     <a href="/LICENSE"><img alt="License" src="https://img.shields.io/github/license/bearlike/simple-secrets-manager"></a>
+    <a href='https://simple-secrets-manager.readthedocs.io/en/latest/?badge=latest'><img src='https://readthedocs.org/projects/simple-secrets-manager/badge/?version=latest' alt='Documentation Status' /></a>
 </p>
 
 
