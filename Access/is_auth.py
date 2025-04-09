@@ -4,14 +4,14 @@ from Api.api import conn, api
 
 # Auth Init
 userpass = HTTPBasicAuth()
-token = HTTPTokenAuth(scheme='Bearer')
+token = HTTPTokenAuth(scheme="Bearer")
 
 # TODO: error_handler
 
 
 @token.verify_token
 def abort_if_authorization_fail(token_to_check):
-    """ Check if an API token is valid
+    """Check if an API token is valid
     Args:
         token_to_check (str): API Token
     """

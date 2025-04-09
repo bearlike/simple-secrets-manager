@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-""" KV (Key-Value) Secret Engine for Secrets Manager
-"""
+"""KV (Key-Value) Secret Engine for Secrets Manager"""
 import re
 
 
 class Key_Value_Secrets:
     def __init__(self, kv_col):
-        """ KV stands for Key-Value collection
+        """KV stands for Key-Value collection
         Args:
             kv_col (pymongo.collection.Collection)
         """
@@ -24,7 +23,7 @@ class Key_Value_Secrets:
             "value": finder["data"][key],
             "status": "OK",
             "path": path,
-            "key": key
+            "key": key,
         }
         return result, 200
 
@@ -42,8 +41,7 @@ class Key_Value_Secrets:
             _ = self._kv.insert_one(finder)
         if key not in finder["data"].keys():
             # After Creating path, add kv
-            self._kv.update_one(
-                {"path": path}, {"$set": {f"data.{key}": value}})
+            self._kv.update_one({"path": path}, {"$set": {f"data.{key}": value}})
             result = {
                 "status": "success",
                 "path": path,
@@ -59,14 +57,9 @@ class Key_Value_Secrets:
             return "Path not found", 404
         if key not in finder["data"].keys():
             return f"Key not found in '{path}'", 404
-        self._kv.update_one(
-            {"path": path}, {"$unset": {f"data.{key}": 1}})
+        self._kv.update_one({"path": path}, {"$unset": {f"data.{key}": 1}})
         # TODO: Delete document if path has no kv(s)
-        result = {
-            "status": "OK",
-            "path": path,
-            "key": key
-        }
+        result = {"status": "OK", "path": path, "key": key}
         return result, 200
 
     def update(self, path, key, value):
@@ -75,11 +68,6 @@ class Key_Value_Secrets:
             return "Path not found", 404
         if key not in finder["data"].keys():
             return f"Key not found in '{path}'", 404
-        self._kv.update_one(
-            {"path": path}, {"$set": {f"data.{key}": value}})
-        result = {
-            "status": "OK",
-            "path": path,
-            "key": key
-        }
+        self._kv.update_one({"path": path}, {"$set": {f"data.{key}": value}})
+        result = {"status": "OK", "path": path, "key": key}
         return result, 200

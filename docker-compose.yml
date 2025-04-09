@@ -1,4 +1,3 @@
-version: '3'
 # To start stack:
 # $ docker-compose run -d
 #
@@ -23,7 +22,10 @@ services:
       - app-tier
 
   ssm-app:
-    image: krishnaalagiri/ssm:latest
+    image: ghcr.io/bearlike/simple-secrets-manager:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
     restart: always
     depends_on:
       - mongo

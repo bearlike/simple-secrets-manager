@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-""" User-Pass authentication for Secrets Manager
-"""
+"""User-Pass authentication for Secrets Manager"""
 from werkzeug.security import generate_password_hash, check_password_hash
 from bson.timestamp import Timestamp
 from textwrap import dedent
@@ -32,28 +31,30 @@ class _password_policy:
         (4) Must have at least { self.numbers } numbers.
         (5) Must have at least { self.special } special characters.
         """
-        policy_str = dedent(policy_str).replace('\n', ' ')
+        policy_str = dedent(policy_str).replace("\n", " ")
         return policy_str
 
     def check(self, password):
-        """ Password policy/rules to encourage users to employ strong passwords.
+        """Password policy/rules to encourage users to employ strong passwords.
         Args:
             password (str): Password string
         Returns:
             bool: True if password policy is satisfied
         """
-        if len(password) >= self.length and \
-                len(re.findall("[a-z]", password)) >= self.lowercase and \
-                len(re.findall("[A-Z]", password)) >= self.uppercase and \
-                len(re.findall("[0-9]", password)) >= self.numbers and \
-                len(re.findall("[^a-z^A-Z^0-9]", password)) >= self.special:
+        if (
+            len(password) >= self.length
+            and len(re.findall("[a-z]", password)) >= self.lowercase
+            and len(re.findall("[A-Z]", password)) >= self.uppercase
+            and len(re.findall("[0-9]", password)) >= self.numbers
+            and len(re.findall("[^a-z^A-Z^0-9]", password)) >= self.special
+        ):
             return True
         return False
 
 
 class User_Pass:
     def __init__(self, userpass_auth_col):
-        """ Userpass operations
+        """Userpass operations
         Args:
             userpass_auth_col (pymongo.collection.Collection)
         """
@@ -63,7 +64,7 @@ class User_Pass:
         self.p_pol = _password_policy()
 
     def register(self, username, password):
-        """ Register a new user
+        """Register a new user
         Args:
             username (str): Username
             password (str): Password
@@ -78,7 +79,7 @@ class User_Pass:
             return f"Password policy not met. { self.p_pol }", 400
         finder = self._userpass.find_one({"username": username})
         if not finder:
-            password = generate_password_hash(password, method='sha256')
+            password = generate_password_hash(password, method="sha256")
             data = {
                 "username": username,
                 "password": password,
@@ -90,7 +91,7 @@ class User_Pass:
         return "User already exist", 400
 
     def remove(self, username):
-        """ Deletes an existing user
+        """Deletes an existing user
         Args:
             username (str): Username
         Returns:
@@ -104,7 +105,7 @@ class User_Pass:
         return result, 200
 
     def is_authorized(self, username, password):
-        """ Check if a userpass is valid
+        """Check if a userpass is valid
         Args:
             username (str): Username
             password (str): Password
