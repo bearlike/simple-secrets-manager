@@ -1,26 +1,49 @@
 #!/usr/bin/env python3
 
-import logging
 import os
-from distutils.util import strtobool
+from loguru import logger
 from dotenv import load_dotenv
 
 load_dotenv()
 
-logging.basicConfig(filename='secrets_manager.log',
-                    format='%(asctime)s %(levelname)-8s %(message)s',
-                    datefmt='%d-%m-%Y %H:%M:%S',
-                    level=logging.WARNING)
+logger.add(
+    "secrets_manager.log",
+    enqueue=True,
+    colorize=False,
+    level="WARNING",
+    rotation="8 MB",
+    format="{time:DD-MM-YYYY HH:mm:ss} {level} {message}",
+)
+
+
+def strtobool(val: str) -> bool:
+    """Convert a string representation of truth to True or False.
+
+    True values are 'y', 'yes', 't', 'true', 'on', and '1';
+    False values are 'n', 'no', 'f', 'false', 'off', and '0'.
+    Raises ValueError if 'val' is anything else.
+    """
+    val = val.lower().strip()
+    if val in ("y", "yes", "t", "true", "on", "1"):
+        return True
+    elif val in ("n", "no", "f", "false", "off", "0"):
+        return False
+    else:
+        logger.warning(f"invalid truth value {val!r}")
+        return False
 
 
 def init_app():
     from Api.api import app
-    app.run(host=os.environ.get("BIND_HOST", '0.0.0.0'),
-            port=os.environ.get("PORT", 5000),
-            debug=bool(strtobool(os.getenv('DEBUG', 'False'))),
-            use_reloader=True)
+
+    app.run(
+        debug=strtobool(os.getenv("DEBUG", "False")),
+        host=os.environ.get("BIND_HOST", "0.0.0.0"),
+        port=os.environ.get("PORT", 5000),
+        use_reloader=True,
+    )
 
 
 if __name__ == "__main__":
-    print("Server started...")
+    logger.info("Starting Secrets Manager")
     init_app()

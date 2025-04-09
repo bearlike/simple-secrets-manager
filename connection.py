@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """Database model for the Secrets Manager"""
-import pymongo
-import logging
 import os
 import sys
+import pymongo
+from loguru import logger
 
 # Secret engines imports
 from Engines.kv import Key_Value_Secrets as _KV
@@ -16,7 +16,7 @@ from Access.userpass import User_Pass as _User_Pass
 class __connection:
     def __init__(self):
         if os.environ.get("CONNECTION_STRING") is None:
-            logging.error("CONNECTION_STRING variable not found")
+            logger.error("CONNECTION_STRING variable not found")
             sys.exit(-1)
         # Create a connection using MongoClient.
         self.__client = pymongo.MongoClient(os.environ["CONNECTION_STRING"])

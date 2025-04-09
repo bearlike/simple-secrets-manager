@@ -1,8 +1,9 @@
 <h1 align="center"><a href="#"><img alt="Simple Secrets Manager" src="docs/img/gh_banner.png" /></a></h1>
 <p align="center">
-    <a href="https://hub.docker.com/r/krishnaalagiri/ssm"><img alt="Docker Image Latest Version" src="https://img.shields.io/docker/v/krishnaalagiri/ssm?logo=docker&sort=semver"></a>
-    <a href="https://hub.docker.com/r/krishnaalagiri/ssm"><img alt="Docker Image Architecture" src="https://img.shields.io/badge/architecture-arm64v8%20%7C%20x86__64-blue?logo=docker"></a>
-    <a href="https://github.com/bearlike/simple-secrets-manager/actions/workflows/ci.yml"><img alt="GitHub Repository" src="https://img.shields.io/github/workflow/status/bearlike/simple-secrets-manager/Build%20and%20deploy%20multiarch%20image?logo=github"></a>
+    <a href="https://github.com/bearlike/simple-secrets-manager/wiki/First%E2%80%90Time-Usage"><img alt="Documentation" src="https://img.shields.io/badge/Wiki-docs-informational?logo=github"></a>
+    <a href="https://github.com/bearlike/simple-secrets-manager/pkgs/container/simple-secrets-manager"><img alt="Docker Image Tag" src="https://img.shields.io/badge/Docker-ghcr.io%2Fbearlike%2Fsimple%E2%80%94secrets%E2%80%94manager%3Alatest-blue?logo=docker"></a>
+    <a href="https://github.com/bearlike/simple-secrets-manager/pkgs/container/simple-secrets-manager"><img alt="Docker Image Architecture" src="https://img.shields.io/badge/architecture-arm64v8%20%7C%20x86__64-blue?logo=docker"></a>
+    <a href="https://github.com/bearlike/simple-secrets-manager/actions/workflows/ci.yml"><img alt="GitHub Repository" src="https://img.shields.io/github/actions/workflow/status/bearlike/simple-secrets-manager/ci.yml?logo=github&branch=main"></a>
     <a href="/LICENSE"><img alt="License" src="https://img.shields.io/github/license/bearlike/simple-secrets-manager"></a>
 </p>
 
@@ -43,22 +44,37 @@ Hashi Corp Vault works well but it was meant for enterprises. Therefore, it was 
 
 1. Run the [stack](docker-compose.yml) by executing `docker-compose up -d`.
 
-### Manual Install
+### Manual Installation
 
-1. Clone our repository and run
+#### Setup Steps
 
-    ```bash
-    git clone --depth 1 https://github.com/bearlike/simple-secrets-manager simple-secrets-manager
-    cd "simple-secrets-manager"
-    ```
+1. **Clone repository**
 
-2. Start a Mongo database server.
-3. Create a `.env` file in the project root with the following values
+   ```bash
+   git clone --depth 1 https://github.com/bearlike/simple-secrets-manager
+   cd simple-secrets-manager
+   ```
 
-    ```sh
-    CONNECTION_STRING=mongodb://username:password@mongo.hostname:27017
-    ```
+2. Create a `.env` file in the project root to configure MongoDB connection.
 
-4. Install the required python packages by executing `pip3 install -r requirements.txt`
-5. You will need atleast `python3.9`. Start the server by running `server.py`.
-6. Visit the application via `http://server_hostname:5000/api` (default port is `5000`) to visit the Swagger UI.
+   ```sh
+   CONNECTION_STRING=mongodb://username:password@mongo.hostname:27017
+   ```
+
+3. **Install dependencies**
+
+   ```bash
+   pip3 install -r requirements.txt
+   # Or if using Poetry
+   poetry install
+   ```
+
+4. **Start the server**
+
+   ```bash
+   python3 server.py
+   ```
+
+5. **Access the application**: Browse to `http://server_hostname:5000/api` to access the Swagger UI
+
+For user creation and initial setup, see the [First-Time Usage Guide](https://github.com/bearlike/simple-secrets-manager/wiki/First%E2%80%90Time-Usage).

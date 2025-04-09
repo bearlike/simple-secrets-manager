@@ -13,6 +13,9 @@ services:
   mongo:
     image: mongo:4
     restart: always
+    # Can be commented out if you don't want to expose the mongo port
+    ports:
+      - "27017:27017"
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: password
