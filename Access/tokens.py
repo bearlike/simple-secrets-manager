@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
-""" Token authentication for Secrets Manager
-"""
+"""Token authentication for Secrets Manager"""
 # TODO: Implement Max TTL, Access Control
 
 from bson.timestamp import Timestamp
@@ -10,7 +9,7 @@ import secrets
 
 class Tokens:
     def __init__(self, token_auth_col):
-        """ API token operations
+        """API token operations
         Args:
             token_auth_col (pymongo.collection.Collection)
         """
@@ -19,7 +18,7 @@ class Tokens:
         self._tokens = token_auth_col
 
     def generate(self, username, max_ttl=15811200):
-        """ Generates an API token
+        """Generates an API token
         Args:
             max_ttl (int, optional): Maximum TTL for generated token in seconds
                     Defaults to 6 months or 15811200 seconds.
@@ -38,10 +37,7 @@ class Tokens:
         return status
 
     def revoke(self, token, username):
-        data = {
-            "token": token,
-            "owner": username
-        }
+        data = {"token": token, "owner": username}
         finder = self._tokens.find_one(data)
         if not finder:
             result = {"status": "Path not found"}
@@ -51,7 +47,7 @@ class Tokens:
         return result
 
     def is_authorized(self, token):
-        """ Check if a given token is valid
+        """Check if a given token is valid
         Args:
             token (str): API token
         Returns:

@@ -7,51 +7,52 @@
     <a href="https://github.com/bearlike/simple-secrets-manager/blob/main/LICENSE"><img alt="License" src="https://img.shields.io/github/license/bearlike/simple-secrets-manager"></a>
 </p>
 
-
 Secure storage, and delivery for tokens, passwords, API keys, and other secrets using HTTP API, Swagger UI or Python Package.
-> `TL;DR`: Poor Man's Hashi Corp Vault 
-
+> `TL;DR`: Poor Man's Hashi Corp Vault
 
 ## Supported tags and respective [Dockerfile](https://github.com/bearlike/simple-secrets-manager/blob/main/Dockerfile) links
+
 - [`1.2.0`, `1.2`, `1`, `latest`](https://github.com/bearlike/simple-secrets-manager/blob/releases/v1.2.0/Dockerfile)
 - [`1.1.2`, `1.1`](https://github.com/bearlike/simple-secrets-manager/blob/releases/v1.1.2/Dockerfile)
 - [`1.1.1`](https://github.com/bearlike/simple-secrets-manager/blob/releases/v1.1.1/Dockerfile)
 - [`1.1.0`](https://github.com/bearlike/simple-secrets-manager/blob/releases/v1.1.0/Dockerfile)
 - [`1.0.0`, `1.0`](https://github.com/bearlike/simple-secrets-manager/blob/releases/v1.0.0/Dockerfile)
 
-
 ## Quick reference (cont.)
-- Where to file issues: https://github.com/bearlike/simple-secrets-manager/issues
+
+- Where to file issues: <https://github.com/bearlike/simple-secrets-manager/issues>
 - Supported architectures: ([more info](https://github.com/docker-library/official-images#architectures-other-than-amd64)) `amd64`, `arm64v8`
 
-
 ## Why does this exist?
-Hashi Corp Vault works well but it was meant for enterprises. Therefore, it was heavy and non-portable (atleast difficult) for my homelab setup. So I wanted to build a Secrets Manager intended for small scale setups that could also scale well. 
 
+Hashi Corp Vault works well but it was meant for enterprises. Therefore, it was heavy and non-portable (atleast difficult) for my homelab setup. So I wanted to build a Secrets Manager intended for small scale setups that could also scale well.
 
 ## Goals
+
 - A lightweight system that sucks less power out of the wall. Therefore, minimal background jobs and reduced resource utilizations.
 - Should be compatible on both `x86-64` and `arm64v8` (mainly Raspberry Pi 4).
-- High stability, availability and easy scalability.      
-
+- High stability, availability and easy scalability.
 
 ## Available secret engines
+
 | Secret Engine | Description                                          |
 | ------------- | ---------------------------------------------------- |
 | `kv`          | Key-Value engine is used to store arbitrary secrets. |
 
-
 ## Available authentication methods
+
 | Auth Methods      | Description                                 |
 |-------------------|---------------------------------------------|
 | `userpass`        | Allows users to authenticate using a username and password combination.   |
 | `token`           | Allows users to authenticate using a token. Token generation requires users to be authenticated via `userpass`  |
 
-
 ## Getting started
+
 ### Automated Install: [`docker-compose`](https://docs.docker.com/compose/install/) (Recommended)
+
 1. Run the [stack](https://github.com/bearlike/simple-secrets-manager/blob/main/docker-compose.yml) by executing `docker-compose up -d`.
 2. Stop stack by executing `docker-compose down`
+
 ```yaml
 version: '3'
 volumes:
