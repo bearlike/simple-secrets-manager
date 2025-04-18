@@ -79,7 +79,7 @@ class User_Pass:
             return f"Password policy not met. { self.p_pol }", 400
         finder = self._userpass.find_one({"username": username})
         if not finder:
-            password = generate_password_hash(password, method="sha256")
+            password = generate_password_hash(password, method="pbkdf2:sha256")
             data = {
                 "username": username,
                 "password": password,
