@@ -13,7 +13,7 @@ conn = Connection()
 api_v1 = Blueprint("api", __name__, url_prefix="/api")
 api = Api(
     api_v1,
-    version="1.2.1",
+    version="1.2.2",
     title="Simple Secrets Manager",
     description="Secrets management simplified",
     authorizations=authorizations,

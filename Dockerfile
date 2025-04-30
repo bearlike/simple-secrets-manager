@@ -3,7 +3,7 @@
 FROM python:3.13-slim-bookworm
 
 LABEL org.opencontainers.image.title="Simple Secrets Manager"
-LABEL org.opencontainers.image.version="1.2.1"
+LABEL org.opencontainers.image.version="1.2.2"
 LABEL org.opencontainers.image.authors="Krishnakanth Alagiri"
 LABEL org.opencontainers.image.url="https://github.com/bearlike/simple-secrets-manager"
 LABEL org.opencontainers.image.source="https://github.com/bearlike/simple-secrets-manager"
