@@ -4,7 +4,7 @@
 # $ docker login -u <username>
 #
 # We try to follow [SemVer v2.0.0](https://semver.org/)
-VERSION="1.2.1"
+VERSION="1.2.2"
 IMAGE_NAME="ghcr.io/bearlike/simple-secrets-manager"
 # If $VERSION = "1.2.3"
 # ${VERSION::3} will be "1.2"
